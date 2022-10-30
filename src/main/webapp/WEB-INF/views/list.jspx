@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page"
+     xmlns:c="http://java.sun.com/jsp/jstl/core"
+     xmlns:spring="http://www.springframework.org/tags" xmlns:form="http://www.springframework.org/tags/form"
+     version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+
+    <spring:message code="allrooms_title" var="allRoomsTitle"/>
+    <spring:message code="room_search_label" var="roomSearchLabel"/>
+    <spring:message code="room_number_label" var="roomNumberLabel"/>
+    <spring:message code="room_price_label" var="roomPriceLabel"/>
+    <spring:message code="room_typebyquality_label" var="roomTypeLabel"/>
+    <spring:message code="room_customersnum_label" var="roomCustomersNumLabel"/>
+    <spring:message code="room_floortype_label" var="roomFloorTypeLabel"/>
+    <spring:message code="room_viewtype_label" var="roomViewTypeLabel"/>
+    <spring:message code="room_direction_label" var="roomDirectionLabel"/>
+    <spring:message code="room_breakfast_label" var="roomBreakfastLabel"/>
+    <spring:message code ="room_additionalservice_label" var="roomAdditionalServiceLabel"/>
+    <spring:message code="search_label" var="searchLabel"/>
+    <spring:url value="/" var="homeUrl"/>
+
+    <div id="room_list">
+
+        <h2>${allRoomsTitle}</h2>
+
+        <form:form modelAttribute="search" id="searchForm" method="post">
+            <table>
+                <caption>${roomSearchLabel}</caption>
+                <thead>
+
+                    <th>${roomPriceLabel}</th>
+                    <th>${roomTypeLabel}</th>
+                    <th>${roomCustomersNumLabel}</th>
+
+
+
+                </thead>
+                <tbody>
+                    <tr>
+
+
+                        <td><form:input path="price" type="number" /> </td>
+                        <!--<td><form:input path="type" /></td>-->
+                        <td><form:select path="roomQualityType" items="${qualtypes}"/></td>
+                        
+                        <td><form:select path="roomCustomersNumber" items="${customersnum}"/></td>
+
+
+
+
+                    </tr>
+                </tbody>
+            </table>
+            <table>
+
+                <thead>
+
+
+                <th>${roomFloorTypeLabel}</th>
+                <th>${roomViewTypeLabel}</th>
+                <th>${roomDirectionLabel}</th>
+
+                <th></th>
+                </thead>
+                <tbody>
+                <tr>
+
+
+
+
+                    <td><form:select path="roomFloorType" items="${floortype}"/></td>
+
+                    <td><form:select path="roomViewType" items="${viewtype}"/></td>
+
+
+                    <!--<td><form:input path="direction" /></td>-->
+                    <td><form:select path="direction" items="${directions}"/></td>
+
+                    <td>
+                        <a>
+                            <input name="search" type="submit" value="${searchLabel}"/>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </form:form>
+
+        <p/>
+
+        <table>
+            <caption>${allRoomsTitle}</caption>
+            <thead>
+            <th>${roomNumberLabel}</th>
+            <th>${roomPriceLabel}</th>
+            <th>${roomTypeLabel}</th>
+            <th>${roomCustomersNumLabel}</th>
+            <th>${roomFloorTypeLabel}</th>
+            <th>${roomViewTypeLabel}</th>
+            <th>${roomDirectionLabel}</th>
+            <th>${roomBreakfastLabel}</th>
+            <th>${roomAdditionalServiceLabel}</th>
+        </thead>
+            <tbody>
+            <c:forEach items="${rooms}" var="room">
+                <tr>
+                    <td><a href="${homeUrl}${room.id.toString()}">${room.number}</a></td>
+                    <td>${room.price}</td>
+                    <td>${room.roomQualityType}</td>
+                    <td>${room.roomCustomersNumber}</td>
+                    <td>${room.roomFloorType}</td>
+                    <td>${room.roomViewType}</td>
+                    <td>${room.direction}</td>
+                    <td>${room.breakfast}</td>
+                    <td>${room.serviceForRoom}</td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+    </div>
+</div>
